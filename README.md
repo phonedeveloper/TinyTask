@@ -1,13 +1,13 @@
 # TinyTask for Arduino: create non-blocking delays, do timeouts, etc
 
 TinyTask allows you to schedule a function to be called at a later time.
-For example, if you turn an LED on, rather than delay() until it is
-time to turn it off, you can have another function to turn it off, schedule
-it to run in 500 ms, and go about your way.
+For example, rather than delay() to flash an LED, which prevents you from
+doing anything else, you can create a function that toggles the LED, and then
+use TinyTask to call it periodically, letting you do other things in between.
 
 It works like this:
 
-1. Create a task to run. For example, this task will turn an LED on
+1. Create a task (a function) to run. For example, this task will turn an LED on
    if it is off, or turn it off if it is on:
 
 ```
@@ -17,7 +17,7 @@ void blinkTask() {
 }
 ```
 
-2. Create the TinyTask, and tell it what task will be run:
+2. Name the TinyTask, and tell it what task it will run. Here we create a TinyTask named "blink" that will call blinkTask() above:
 
 ```
 TinyTask blink(blinkTask);
@@ -33,7 +33,7 @@ setup() {
 ```
 
 4. Check the task once every loop. If it is time to be called,
-it will be called:
+it will be called from loop(). Otherwise it exits and you can do other stuff in the meantime:
 
 ```
 loop() {
