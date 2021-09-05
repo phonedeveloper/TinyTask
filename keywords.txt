@@ -1,0 +1,12 @@
+# Class
+TinyTask KEYWORD1
+
+# Methods
+callIn KEYWORD2
+callAt KEYWORD2
+callEvery KEYWORD2
+useMicros KEYWORD2
+useMillis KEYWORD2
+remaining KEYWORD2
+cancel KEYWORD2
+loop KEYWORD2
