@@ -1,4 +1,4 @@
-# TinyTask - for Arduino: create non-blocking delays, do timeouts, etc
+# TinyTask for Arduino: create non-blocking delays, do timeouts, etc
 
 TinyTask allows you to schedule a function to be called at a later time.
 For example, if you turn an LED on, rather than delay() until it is
