@@ -1,5 +1,7 @@
 # TinyTask for Arduino: create non-blocking delays, do timeouts, etc
 
+***This new library is*** **ALPHA** ***and needs more testing. Please report any issues. Thanks!***
+
 TinyTask allows you to schedule a function to be called at a later time.
 For example, rather than delay() to flash an LED, which prevents you from
 doing anything else, you can create a function that toggles the LED, and then
@@ -98,4 +100,8 @@ interrupt, you can call it from inside an interrupt service routine.
 
 # TinyTask is cooperative
 
-This means that if you have something that takes a lot of time, or you call a function that never returns, or something blocks for a long time (like a long delay(), which TinyTask is intended to replace), or your code in the main Arduino loop() does not actually loop, 
+This means that if you have something that takes a lot of time, or you call a function that never returns, or something blocks for a long time (like a long delay(), which TinyTask is intended to replace), or your code in the main Arduino loop() does not actually loop,
+
+# Versions
+
+**0.0.1 2021/09/05***: initial release
