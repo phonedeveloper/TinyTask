@@ -3,7 +3,7 @@
 ***This new library is*** **ALPHA** ***and needs more testing. Please report any issues. Thanks!***
 
 TinyTask allows you to schedule a function to be called at a later time.
-For example, rather than delay() to flash an LED, which prevents you from
+For example, rather than ```delay()``` to flash an LED, which prevents you from
 doing anything else, you can create a function that toggles the LED, and then
 use TinyTask to call it periodically, letting you do other things in between.
 
@@ -19,7 +19,7 @@ void blinkTask() {
 }
 ```
 
-2. Name the TinyTask, and tell it what task it will run. Here we create a TinyTask named "blink" that will call blinkTask() above:
+2. Name the TinyTask, and tell it what task it will run. Here we create a TinyTask named "blink" that will call ```blinkTask()``` above:
 
 ```
 TinyTask blink(blinkTask);
@@ -35,7 +35,7 @@ setup() {
 ```
 
 4. Check the task once every loop. If it is time to be called,
-it will be called from loop(). Otherwise it exits and you can do other stuff in the meantime:
+it will be called from ```blink.loop()```. Otherwise it exits and you can do other stuff in the meantime:
 
 ```
 loop() {
@@ -76,31 +76,29 @@ but it may be simpler to pair a task with each TinyTask.
  
 # What does the TinyTask loop() function do?
 
-NOTE: I'm going to use "blink.look()", from the example,  instead of 
-just "loop()", so that it isn't confused with the main Arduino loop function.
+I'm going to refer to the example use of the ```loop()``` function, "```blink.look()```", instead of 
+just "```loop()```", so that it isn't confused with the main Arduino ```loop()``` function.
 
-blink.loop() does nothing more than check to see if it is
+```blink.loop()``` does nothing more than check to see if it is
 time to run the task. If it isn't time, it will exit and other things
-can be done inside the main Arduino loop(). If it is time, it will call
+can be done inside the main Arduino ```loop()```. If it is time, it will call
 the task and then return, and again, other things can be done inside loop().
 
 I was thinking of calling this function
-blink.checkToSeeIfItIsTimeToRunTheTaskAndIfSoCallItOtherwiseJustReturn()
+```blink.checkToSeeIfItIsTimeToRunTheTaskAndIfSoCallItOtherwiseJustReturn()```
 but that was just too long and confusing.
 
-So I chose the confusing name of loop() to remind people that the
-Arduino loop() is a good place to call it.
+So I chose the less confusing name of ```loop()``` to remind people that the
+Arduino ```loop()``` is a good place to call it.
 
-Actually you can call yourTinyTask.loop() wherever you want. If you have a
-really long running function, you could sprinkle calls to yourTinyTask.loop()
+Actually you can call ```blink.loop()``` wherever you want. If you have a
+really long running function, you could sprinkle calls to ```blink.loop()```
 in there to make sure it's checked and called frequently enough (note that
-this will effectively call your task from within your long running function.)
-If for some reason you need your Task checker and task to run from within an
-interrupt, you can call it from inside an interrupt service routine.
+this will effectively call your task from within your long running function if it is time.)
 
 # TinyTask is cooperative
 
-This means that if you have something that takes a lot of time, or you call a function that never returns, or something blocks for a long time (like a long delay(), which TinyTask is intended to replace), or your code in the main Arduino loop() does not actually loop,
+This means that if you have something that takes a lot of time, or you call a function that never returns, or something blocks for a long time (like a long ```delay()```, which TinyTask is intended to replace), or your code in the main Arduino ```loop()``` does not actually loop,
 
 # Versions
 
