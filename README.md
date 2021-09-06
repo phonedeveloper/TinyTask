@@ -76,8 +76,8 @@ but it may be simpler to pair a task with each TinyTask.
  
 # What does the TinyTask loop() function do?
 
-I'm going to refer to the example use of the ```loop()``` function, "```blink.look()```", instead of 
-just "```loop()```", so that it isn't confused with the main Arduino ```loop()``` function.
+I'm going to refer to the example use of the ```loop()``` function, ```blink.look()```, instead of 
+just ```loop()```, so that it isn't confused with the main Arduino ```loop()``` function.
 
 ```blink.loop()``` does nothing more than check to see if it is
 time to run the task. If it isn't time, it will exit and other things
