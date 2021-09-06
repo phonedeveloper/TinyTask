@@ -7,7 +7,7 @@ For example, rather than ```delay()``` to flash an LED, which prevents you from
 doing anything else, you can create a function that toggles the LED, and then
 use TinyTask to call it periodically, letting you do other things in between.
 
-It works like this:
+## How it works
 
 1. Create a task (a function) to run. For example, this task will turn an LED on
    if it is off, or turn it off if it is on:
@@ -45,7 +45,7 @@ loop() {
 }
 ```
 
-# Full example:
+## Full example
 
 ```
 #include "TinyTask.h"
@@ -69,26 +69,28 @@ void loop() {
 }
 ```
 
-# CallEvery, CallAt, or CallIn
+## CallEvery, CallAt, or CallIn
 
 ```callEvery(long interval)``` calls the task every at specified interval.
 ```callIn(long interval)``` calls the task once after interval milliseconds (or microseconds).
 ```callAt(unsigned long futureTime)``` calls the task at a future time (as compared to millis() or micros()).
 
-Each returns ```true``` if the task was scheduled. You'll see ```false``` only if a negative value was supplied for ```CallEvery()``` or ```CallIn()```. ```CallAt()``` will return false if the future time is more than 2147483647 seconds from now.
+Each returns ```true``` if the task was scheduled. You'll see ```false``` only if a negative value was supplied for ```CallEvery()``` or ```CallIn()```. ```CallAt()``` will return false if the future time is more than 2147483647 milliseconds or microseconds from now (depending on what timebase you are using).
 
-# Milliseconds or microseconds
+The maximum time ahead that can be scheduled / maximum interval is **24.8 days** (default/using milliseconds) or **35.7 minutes** (using microseconds). The corresponding max value for ```callEvery()``` or ```callIn()``` is **2147483647** (2^31 - 1).
+
+## Milliseconds or microseconds
 
 TinyTask times are in milliseconds by default, compared to the current Arduino time reported by the Arduino ```millis()``` function.
 
 If microseconds are desired, the library's ```useMicros()``` method will switch the timebase to microseconds (using Arduino ```micros()```) for that TinyTask. Use ```useMillis()``` to switch back to milliseconds.
 
-# Create one TinyTask for each task
+## Create one TinyTask for each task
 
 What it says. You can of course call the same task from different TinyTasks,
 but it may be simpler to pair a task with each TinyTask.
  
-# What does the TinyTask loop() function do?
+## What does the TinyTask loop() function do?
 
 I'm going to refer to the example use of the ```loop()``` function, ```blink.look()```, instead of 
 just ```loop()```, so that it isn't confused with the main Arduino ```loop()``` function.
@@ -110,9 +112,9 @@ really long running function, you could sprinkle calls to ```blink.loop()```
 in there to make sure it's checked and called frequently enough (note that
 this will effectively call your task from within your long running function if it is time.)
 
-# TinyTask is cooperative
+## TinyTask is cooperative
 
-This means that if you have something that takes a lot of time, or you call a function that never returns, or something blocks for a long time (like a long ```delay()```, which TinyTask is intended to replace), or your code in the main Arduino ```loop()``` does not actually loop,
+This means that if you have something that takes a lot of time, or you call a function that never returns, or something blocks for a long time (like a long ```delay()```, which TinyTask is intended to replace), or your code in the main Arduino ```loop()``` does not actually loop, your task won't get called. Since TinyTask's loop() function calls the task, if other code is running when it's time to call your task, it won't get called until that code is finished and TinyTask's loop() has a chance to run.
 
 # Versions
 
