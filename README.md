@@ -102,4 +102,4 @@ This means that if you have something that takes a lot of time, or you call a fu
 
 # Versions
 
-**0.0.1 2021/09/05***: initial release
+**0.0.1 2021/09/05**: initial release
