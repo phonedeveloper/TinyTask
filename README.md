@@ -69,6 +69,20 @@ void loop() {
 }
 ```
 
+# CallEvery, CallAt, or CallIn
+
+```callEvery(long interval)``` calls the task every at specified interval.
+```callIn(long interval)``` calls the task once after interval milliseconds (or microseconds).
+```callAt(unsigned long futureTime)``` calls the task at a future time (as compared to millis() or micros()).
+
+Each returns ```true``` if the task was scheduled. You'll see ```false``` only if a negative value was supplied for ```CallEvery()``` or ```CallIn()```. ```CallAt()``` will return false if the future time is more than 2147483647 seconds from now.
+
+# Milliseconds or microseconds
+
+TinyTask times are in milliseconds by default, compared to the current Arduino time reported by the Arduino ```millis()``` function.
+
+If microseconds are desired, the library's ```useMicros()``` method will switch the timebase to microseconds (using Arduino ```micros()```) for that TinyTask. Use ```useMillis()``` to switch back to milliseconds.
+
 # Create one TinyTask for each task
 
 What it says. You can of course call the same task from different TinyTasks,
@@ -80,7 +94,7 @@ I'm going to refer to the example use of the ```loop()``` function, ```blink.loo
 just ```loop()```, so that it isn't confused with the main Arduino ```loop()``` function.
 
 ```blink.loop()``` does nothing more than check to see if it is
-time to run the task. If it isn't time, it will exit and other things
+time to run the task, and run it if it is. If it isn't time, it will exit and other things
 can be done inside the main Arduino ```loop()```. If it is time, it will call
 the task and then return, and again, other things can be done inside loop().
 
@@ -102,4 +116,4 @@ This means that if you have something that takes a lot of time, or you call a fu
 
 # Versions
 
-**0.0.1 2021/09/05**: initial release
+**0.0.1 - 2021/09/05**: initial release
