@@ -47,7 +47,7 @@ void loop() {
  * - cancel() allows you to cancel a task scheduled to be run
  *   cancel() can be used to stop a callEvery task that repeats.
  * - remaining() tells you if the task is going to run and when.
- *   remaining() can be used to determine how long you can sleep the Arduino to save power.
+ *   remaining() returns the amount of time (millis or micros) remaining, or -1 if not scheduled.
  * 
  * TinyTask tasks cannot take parameters, except one exception: support is provided for a task
  * that can take a single pointer as a parameter. This open doors, but it's use is
