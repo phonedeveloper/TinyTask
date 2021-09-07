@@ -116,6 +116,10 @@ this will effectively call your task from within your long running function if i
 
 This means that if you have something that takes a lot of time, or you call a function that never returns, or something blocks for a long time (like a long ```delay()```, which TinyTask is intended to replace), or your code in the main Arduino ```loop()``` does not actually loop, your task won't get called. Since TinyTask's loop() function calls the task, if other code is running when it's time to call your task, it won't get called until that code is finished and TinyTask's loop() has a chance to run.
 
-# Versions
+## Releases
+
+Latest (v0.0.1): https://github.com/phonedeveloper/TinyTask/releases/tag/v0.0.1 (pre-release)
+
+## Version info
 
 **0.0.1 - 2021/09/05**: initial release
