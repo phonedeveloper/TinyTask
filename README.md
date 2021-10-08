@@ -118,7 +118,7 @@ This means that if you have something that takes a lot of time, or you call a fu
 
 ## Releases
 
-Latest (v0.0.1): https://github.com/phonedeveloper/TinyTask/releases/tag/v0.0.1 (pre-release)
+Latest (v0.0.1): https://github.com/phonedeveloper/TinyTask/releases/tag/v0.0.1 (pre-release) - only callEvery() works, and must be called before first call to loop() (see [issue #2](https://github.com/phonedeveloper/TinyTask/issues/2), [issue #3](https://github.com/phonedeveloper/TinyTask/issues/3) against this version)
 
 ## Version info
 
