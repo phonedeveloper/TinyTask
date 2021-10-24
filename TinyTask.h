@@ -11,7 +11,7 @@ class TinyTask {
   private:
   
     bool periodic;                            // signals that callEvery() established a recurring task
-    bool armed;                               // signals that the task is currently pending
+    bool active = false;                               // signals that the task is currently pending
     bool microseconds = false;                // indicates whether or not micros() instead of millis() is used
     void* pointerParam;                       // the pointer parameter to supply to the callback
     long interval;                            // for tasks started with callEvery(), the interval between calls

@@ -140,7 +140,7 @@ boolean TinyTask::callIn(long interval) {
     TinyTask::timeout = millis() + interval;
   }
   TinyTask::periodic = false;
-  TinyTask::armed = true;
+  TinyTask::active = true;
   return true;
 }
 
@@ -161,7 +161,7 @@ boolean TinyTask::callAt(unsigned long futureTime) {
   }
   TinyTask::timeout = futureTime;
   TinyTask::periodic = false;
-  TinyTask::armed = true;
+  TinyTask::active = true;
   return true;
 }
 
@@ -179,20 +179,22 @@ boolean TinyTask::callEvery(long interval) {
     TinyTask::timeout = millis() + interval;
   }
   TinyTask::periodic = true;
-  TinyTask::armed = true;
+  TinyTask::active = true;
   return true;
 }
 
 void TinyTask::loop() {
-  if (TinyTask::remaining() <= 0) {
-    if (TinyTask::periodic) {
-      while (TinyTask::remaining() <= 0) {
-        TinyTask::timeout = TinyTask::timeout + TinyTask::interval;
+  if (TinyTask::active) {
+    if (TinyTask::remaining() <= 0) {
+      if (TinyTask::periodic) {
+        while (TinyTask::remaining() <= 0) {
+          TinyTask::timeout = TinyTask::timeout + TinyTask::interval;
+        }
+      } else {
+        TinyTask::active = false;
       }
-    } else {
-      TinyTask::armed = false;
+      TinyTask::callTask();
     }
-    TinyTask::callTask();
   }
 }
 
@@ -217,7 +219,7 @@ void TinyTask::useMicros() {
  * If you have multiple TinyTasks, check all to find the shortest time to sleep.
  */
 long TinyTask::remaining() {
-  if (!TinyTask::armed) return -1L;
+  if (!TinyTask::active) return -1L;
   else {
     unsigned long timeLeft;
     if (TinyTask::microseconds) {
@@ -234,5 +236,5 @@ long TinyTask::remaining() {
 }
 
 void TinyTask::cancel() {
-  TinyTask::armed = false;
+  TinyTask::active = false;
 }
