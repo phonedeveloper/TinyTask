@@ -2,6 +2,9 @@
 
 ***This new library is*** **ALPHA** ***and needs more testing. Please report any issues. Thanks!***
 
+**CURRENT STATUS**
+TinyTask v0.0.1 is a fail except for recurring events started when the library is first used. Issues 2 and 3 will address this. The branch "fix-issues-2-3" currently contains proposed fixes for these issues. It will be merged once unit tests are created and the fixes pass them. (See issue #1 regarding unit testing.) Once these fixes are confirmed, v0.0.2 will be released.
+
 TinyTask allows you to schedule a function to be called at a later time.
 For example, rather than ```delay()``` to flash an LED, which prevents you from
 doing anything else, you can create a function that toggles the LED, and then
